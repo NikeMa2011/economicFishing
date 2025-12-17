@@ -1,0 +1,106 @@
+:root {
+    --textAreaLightColor: rgba(255, 255, 255, 0.25);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #00c3ff;
+}
+
+#mainStatusBar {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    padding: 5px;
+
+    background-color: var(--textAreaLightColor);
+
+    font-size: x-large;
+}
+
+#netInformationBox {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    padding: 10px;
+
+    background-color: var(--textAreaLightColor);
+
+    font-size: larger;
+}
+
+#buyButton, #buyManu {
+    position: absolute;
+
+    top: 50%;
+
+    transform: translate(0, -50%);
+
+    background-color: var(--textAreaLightColor);
+
+    padding: 10px;
+}
+
+#buyManu {
+    padding: 20px 100px 20px 100px;
+
+    text-align: center;
+
+    transform: translate(-100%, -50%);
+}
+
+#nextButton {
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    padding: 10px;
+
+    background-color: var(--textAreaLightColor);
+
+    font-size: xx-large;
+}
+
+#incomeStatusBar {
+    position: absolute;
+
+    right: 0;
+    top: 0;
+
+    padding: 10px;
+
+    background-color: var(--textAreaLightColor);
+}
+
+.greenText {
+    color: #268d11;
+}
+
+.redText {
+    color: #a00e0e;
+}
+
+@keyframes shiftFromLeftToRight {
+    0% {
+        transform: translate(-100%, -50%);
+    } 100% {
+        transform: translate(0, -50%);
+    }
+}
+
+@keyframes shiftFromRightToLeft {
+    0% {
+        transform: translate(0, -50%);
+    } 100% {
+        transform: translate(-100%, -50%);
+    }
+}

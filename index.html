@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <link rel="shortcut icon" href="">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="utf-8">
+        <title>捕鱼经济</title>
+    </head>
+    <body>
+        <div id="UIcontainer">
+            <p id="mainStatusBar">
+                <span id="moneyOwned" class="greenText">null$</span> <span id="day">null</span>
+            </p>
+
+            <div id="netInformationBox">
+                <p>总共网的数量:<span id="totalNetOwned"></span></p>
+                <p>布置在内湾的数量:<span id="netInshore"></span></p>
+                <p>布置在外湾的数量:<span id="netOutshore"></span></p>
+                <p>其余可用的数量:<span id="netExtra"></span></p>
+            </div>
+
+            <div id="buyButton" style="animation: 1s ease-out shiftFromLeftToRight;" onclick="checkBuyManu()">
+                <p>购买网</p>
+            </div>
+
+            <div id="buyManu">
+                <p style="font-size: xx-large">购买网</p>
+                <br>
+                <br>
+                <p>购买数量</p>
+                <p><span id="netBuyNumberIncrease">+</span> <span id="netBuyNumber">null</span>个 <span id="netBuyNumberDecrease">-</span></p>
+                <br>
+                <p>全部梭哈</p>
+            </div>
+
+            <div id="incomeStatusBar">
+                <p>天气状况:<span id="weather">null</span></p>
+                <br>
+                <p><span class="redText">坏天气</span>时, 内湾的网的收入为<span class="greenText">好天气</span>的<span class="greenText">2倍</span>, 外湾的网将会<span class="redText">损毁</span></p>
+                <p><span class="greenText">好天气</span>时, 内湾的网的收入为<span id="inshoreIncome" class="greenText">null$</span>, 外湾的网的收入为<span id="outshoreIncome" class="greenText">null$</span></p>
+                <br>
+                <p>今天单个网的价格为:<span id="netPrice" class="greenText">null$</span></p>
+                <br>
+                <p>下周的租金为:<span id="rentMoney" class="greenText">null$</span></p>
+            </div>
+
+            <div id="nextButton">null</div>
+        </div>
+    </body>
+    <style>
+        @import url("source/css/main.css");
+    </style>
+    <script src="source/js/main.js"></script>
+</html>
