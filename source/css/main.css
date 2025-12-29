@@ -1,5 +1,6 @@
 :root {
     --textAreaLightColor: rgba(255, 255, 255, 0.25);
+    --textAreaPadding: 20px 100px 20px 100px;
 }
 
 * {
@@ -50,7 +51,7 @@ body {
 }
 
 #buyManu {
-    padding: 20px 100px 20px 100px;
+    padding: var(--textAreaPadding);
 
     text-align: center;
 
@@ -81,12 +82,33 @@ body {
     background-color: var(--textAreaLightColor);
 }
 
+#resultBox {
+    position: absolute;
+
+    right: 50%;
+    top: 50%;
+
+    padding: var(--textAreaPadding);
+
+    background-color: var(--textAreaLightColor);
+
+    transform: translate(50%, -50%);
+
+    text-align: center;
+}
+
 .greenText {
     color: #268d11;
 }
 
 .redText {
     color: #a00e0e;
+}
+
+.buyNumberButtonStyle {
+    padding: 4px;
+
+    background-color: var(--textAreaLightColor);
 }
 
 @keyframes shiftFromLeftToRight {

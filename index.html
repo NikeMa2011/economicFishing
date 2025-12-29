@@ -14,23 +14,38 @@
 
             <div id="netInformationBox">
                 <p>总共网的数量:<span id="totalNetOwned"></span></p>
-                <p>布置在内湾的数量:<span id="netInshore"></span></p>
-                <p>布置在外湾的数量:<span id="netOutshore"></span></p>
+                <p>
+                    布置在内湾的数量:<span id="netInshore"></span> 
+                    <span class="buyNumberButtonStyle" onclick="netNumberChange.inshore.increase()">+</span>
+                    <span class="buyNumberButtonStyle" onclick="netNumberChange.inshore.decrease();">-</span>
+                </p>
+                <p>
+                    布置在外湾的数量:<span id="netOutshore"></span> 
+                    <span class="buyNumberButtonStyle" onclick="netNumberChange.outshore.increase()">+</span>
+                    <span class="buyNumberButtonStyle" onclick="netNumberChange.outshore.decrease();">-</span>
+                </p>
                 <p>其余可用的数量:<span id="netExtra"></span></p>
             </div>
 
-            <div id="buyButton" style="animation: 1s ease-out shiftFromLeftToRight;" onclick="checkBuyManu()">
+            <div id="buyButton" style="animation: 1s ease-out shiftFromLeftToRight;" onclick="buyButtonPressed()">
                 <p>购买网</p>
             </div>
 
             <div id="buyManu">
-                <p style="font-size: xx-large">购买网</p>
+                <p style="font-size: xx-large">购买界面</p>
                 <br>
                 <br>
                 <p>购买数量</p>
-                <p><span id="netBuyNumberIncrease">+</span> <span id="netBuyNumber">null</span>个 <span id="netBuyNumberDecrease">-</span></p>
+                <p>
+                    <span class="buyNumberButtonStyle" onclick="netBuyNumberChange.increase()">+</span> 
+                    <span id="netBuyNumber">null</span>个 
+                    <span class="buyNumberButtonStyle" onclick="netBuyNumberChange.decrease()">-</span></p>
                 <br>
-                <p>全部梭哈</p>
+                <p class="buyNumberButtonStyle" onclick="netBuy()">购买</p>
+                <br>
+                <p>花费:<span id="moneyCost" class="greenText">0$</span></p>
+                <br>
+                <p class="buyNumberButtonStyle" onclick="netBuyAll()">全部梭哈</p>
             </div>
 
             <div id="incomeStatusBar">
@@ -44,7 +59,17 @@
                 <p>下周的租金为:<span id="rentMoney" class="greenText">null$</span></p>
             </div>
 
-            <div id="nextButton">null</div>
+            <div id="nextButton" onclick="nextButtonPressed()">
+                <p>开始</p>
+            </div>
+
+            <div id="resultBox" hidden>
+                <p style="font-size: xx-large;">结果</p>
+                <br>
+                <p>财政情况:<span id="moneyProfit">null$</span></p>
+                <br>
+                <p id="netDamagedText" class="redText" hidden>你所有在外滩的网均已损毁</p>
+            </div>
         </div>
     </body>
     <style>
