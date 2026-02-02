@@ -27,7 +27,7 @@
                 <p>其余可用的数量:<span id="netExtra"></span></p>
             </div>
 
-            <div id="buyButton" style="animation: 1s ease-out shiftFromLeftToRight;" onclick="buyButtonPressed()">
+            <div id="buyButton" style="animation: 1s ease-out shiftFromLeftToRight;" onclick="gameOver ? null : buyButtonPressed()">
                 <p>购买网</p>
             </div>
 
@@ -45,7 +45,7 @@
                 <br>
                 <p>花费:<span id="moneyCost" class="greenText">0$</span></p>
                 <br>
-                <p class="buyNumberButtonStyle" onclick="netBuyAll()">全部梭哈</p>
+                <p class="buyNumberButtonStyle" onclick="gameOver ? null : netBuyAll()">全部梭哈</p>
             </div>
 
             <div id="incomeStatusBar">
@@ -59,7 +59,7 @@
                 <p>下周的租金为:<span id="rentMoney" class="greenText">null$</span></p>
             </div>
 
-            <div id="nextButton" onclick="nextButtonPressed()">
+            <div id="nextButton" onclick="gameOver ? null : nextButtonPressed()">
                 <p>开始</p>
             </div>
 
@@ -69,6 +69,16 @@
                 <p>财政情况:<span id="moneyProfit">null$</span></p>
                 <br>
                 <p id="netDamagedText" class="redText" hidden>你所有在外滩的网均已损毁</p>
+            </div>
+
+            <div id="informationBox" hidden>
+                <p style="font-size: xx-large;">事件</p>
+                <br>
+                <p id="information"></p>
+                <br>
+                <p id="gameOver" class="redText" hidden>游戏结束</p>
+                <br>
+                <p  class="buyNumberButtonStyle" onclick="informationBoxDOM.hidden = true;">x</p>
             </div>
         </div>
     </body>

@@ -82,7 +82,7 @@ body {
     background-color: var(--textAreaLightColor);
 }
 
-#resultBox {
+#informationBox, #resultBox {
     position: absolute;
 
     right: 50%;

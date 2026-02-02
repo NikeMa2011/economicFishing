@@ -27,6 +27,11 @@ const rentMoneyDOM = document.getElementById("rentMoney");
 
 const resultBoxDOM = document.getElementById("resultBox");
 
+const informationDOM = document.getElementById("information");
+const informationBoxDOM = document.getElementById("informationBox");
+
+const gameOverDOM = document.getElementById("gameOver");
+
 const netDamagedTextDOM = document.getElementById("netDamagedText");
 
 const moneyProfitDOM = document.getElementById("moneyProfit");
@@ -74,6 +79,9 @@ let manuOpen = false;
 let inRound = false;
 
 let isInWeekEnd = false;
+
+let gameOver = false;
+let negativeMoney = 0;
 
 function setWeatherCondition() {
     let randomNumber = Math.random();
@@ -160,7 +168,25 @@ function nextButtonPressed() {
         day++;
 
         if (day % 5 == 0) {
-            moneyProfit -= 80;
+            moneyProfit -= rentMoney;
+
+            rentMoney += 5;
+        }
+
+        if (net.inshore > 500 || net.outshore > 300) {
+            Math.random() > 0.2 ? information("pollution") : null;
+        } else if (moneyOwned > 10000) {
+            Math.random() > 0.6 ? information("soMuchMoney") : null;
+        } else {
+            Math.random() > 0.95 ? information() : null;
+        }
+
+        if (moneyOwned < 0) {
+            negativeMoney ++;
+        }
+
+        if (negativeMoney > 5) {
+            information("outOfMoney");
         }
 
         if (weatherIsGood) {
@@ -229,7 +255,7 @@ function netBuy() {
     setNetStatusDOM();
 }
 
-function netBuyAll () {
+function netBuyAll() {
     netBuyNumber = 0;
 
     while (true) {
@@ -248,6 +274,77 @@ function netBuyAll () {
 
     setStatusDOM();
     setNetStatusDOM();
+}
+
+function information(option) {
+    if (option == "outOfMoney") {
+        informationDOM.innerHTML = "由于你太久没还钱, 你被告了, 你破产了";
+        gameOverDOM.hidden = true;
+
+        clearAllProperty();
+
+        informationBoxDOM.hidden = false;
+    } else if (option == "soMuchMoney") {
+        if (Math.random() < 0.8) {
+            informationDOM.innerHTML = "由于你的钱太多, 你被资本做局了, 他们拿走了你60%的资产";
+            gameOverDOM.hidden = true;
+
+            net.extra = net.inshore + net.outshore;
+            net.inshore = net.outshore = 0;
+
+            net.extra = Math.floor(net.extra / 0.6);
+            moneyOwned = Math.floor(net.extra / 0.6);
+
+            informationBoxDOM.hidden = false;
+        } else {
+            informationDOM.innerHTML = "由于你的钱太多, 你被资本做局了, 你所有资产都拿走了, 你破产了";
+            gameOverDOM.hidden = false;
+
+            clearAllProperty();
+
+            informationBoxDOM.hidden = false;
+            gameOver = true;
+        }
+    } else if (option == undefined) {
+        let randomNumber = Math.random();
+
+        if (randomNumber < 0.5) {
+            informationDOM.innerHTML = "你这天走在路上看到了50块钱, 你问了一下没有人认, 所以你拿走了";
+            gameOverDOM.hidden = true;
+
+            moneyOwned += 20;
+
+            informationBoxDOM.hidden = false;
+        } else if (randomNumber < 0.8) {
+            informationDOM.innerHTML = "你这天走在路上看到了100块钱, 你问了一下没有人认, 所以你拿走了";
+            gameOverDOM.hidden = true;
+
+            moneyOwned += 50;
+
+            informationBoxDOM.hidden = false;
+        } else {
+            informationDOM.innerHTML = "你这天被撞了, 你得到了赔偿3000块, 你花了1200块用来治疗";
+            gameOverDOM.hidden = true;
+
+            moneyOwned += 1800;
+
+            informationBoxDOM.hidden = false;
+        }
+    } else if (option == "pollution") {
+            informationDOM.innerHTML = "因为你的网太多, 警察把你抓起来并且没收了你全部的网, 还扣了你5000块钱";
+            gameOverDOM.hidden = false;
+
+            net.extra = net.inshore = net.outshore = 0;
+            moneyOwned -= 5000;
+
+            informationBoxDOM.hidden = false;
+            gameOver = true;
+    }
+}
+
+function clearAllProperty() {
+    net.extra = net.inshore = net.outshore = 0;
+    moneyOwned = 0;
 }
 
 let netNumberChange = {
@@ -273,7 +370,7 @@ let netNumberChange = {
         increase() {
             if (net.extra > 0) {
                 net.outshore++;
-                net.extra--; 
+                net.extra--;
 
                 setNetStatusDOM();
             }
