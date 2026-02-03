@@ -173,16 +173,18 @@ function nextButtonPressed() {
             rentMoney += 5;
         }
 
-        if (net.inshore > 500 || net.outshore > 300) {
+        if (net.inshore + net.outshore > 300) {
             Math.random() > 0.2 ? information("pollution") : null;
-        } else if (moneyOwned > 10000) {
-            Math.random() > 0.6 ? information("soMuchMoney") : null;
+        } else if (moneyOwned > 100000) {
+            Math.random() > 0.6 ? information("tooMuchMoney") : null;
         } else {
-            Math.random() > 0.95 ? information() : null;
+            Math.random() > 0.7 ? information() : null;
         }
 
         if (moneyOwned < 0) {
-            negativeMoney ++;
+            negativeMoney++;
+        } else {
+            negativeMoney = 0;
         }
 
         if (negativeMoney > 5) {
@@ -284,10 +286,10 @@ function information(option) {
         clearAllProperty();
 
         informationBoxDOM.hidden = false;
-    } else if (option == "soMuchMoney") {
-        if (Math.random() < 0.8) {
+        gameOver = true;
+    } else if (option == "tooMuchMoney") {
+        if (Math.random() < 0.5) {
             informationDOM.innerHTML = "由于你的钱太多, 你被资本做局了, 他们拿走了你60%的资产";
-            gameOverDOM.hidden = true;
 
             net.extra = net.inshore + net.outshore;
             net.inshore = net.outshore = 0;
@@ -297,7 +299,7 @@ function information(option) {
 
             informationBoxDOM.hidden = false;
         } else {
-            informationDOM.innerHTML = "由于你的钱太多, 你被资本做局了, 你所有资产都拿走了, 你破产了";
+            informationDOM.innerHTML = "由于你的钱太多, 你被资本做局了, 你所有资产都被拿走了, 你破产了";
             gameOverDOM.hidden = false;
 
             clearAllProperty();
@@ -308,37 +310,71 @@ function information(option) {
     } else if (option == undefined) {
         let randomNumber = Math.random();
 
-        if (randomNumber < 0.5) {
-            informationDOM.innerHTML = "你这天走在路上看到了50块钱, 你问了一下没有人认, 所以你拿走了";
-            gameOverDOM.hidden = true;
+        if (randomNumber > 0.5) {
+            randomNumber = Math.random();
 
-            moneyOwned += 20;
+            if (randomNumber < 0.5) {
+                informationDOM.innerHTML = "你这天走在路上看到了20块钱, 你问了一下没有人认, 所以你拿走了";
+                gameOverDOM.hidden = true;
 
-            informationBoxDOM.hidden = false;
-        } else if (randomNumber < 0.8) {
-            informationDOM.innerHTML = "你这天走在路上看到了100块钱, 你问了一下没有人认, 所以你拿走了";
-            gameOverDOM.hidden = true;
+                moneyOwned += 20;
 
-            moneyOwned += 50;
+                informationBoxDOM.hidden = false;
+            } else if (randomNumber < 0.8) {
+                informationDOM.innerHTML = "你这天走在路上看到了50块钱, 你问了一下没有人认, 所以你拿走了";
+                gameOverDOM.hidden = true;
 
-            informationBoxDOM.hidden = false;
+                moneyOwned += 50;
+
+                informationBoxDOM.hidden = false;
+            }   else if (randomNumber < 0.92) {
+                informationDOM.innerHTML = "你这天走在路上看到了100块钱, 你问了一下没有人认, 所以你拿走了";
+                gameOverDOM.hidden = true;
+
+                moneyOwned += 100;
+
+                informationBoxDOM.hidden = false;
+            } else {
+                informationDOM.innerHTML = "你这天下海时看到一个溺水的小孩, 你把他救了上来, 家长给你20000块";
+                gameOverDOM.hidden = true;
+
+                moneyOwned += 20000;
+
+                informationBoxDOM.hidden = false;
+            }
         } else {
-            informationDOM.innerHTML = "你这天被撞了, 你得到了赔偿3000块, 你花了1200块用来治疗";
-            gameOverDOM.hidden = true;
+            randomNumber = Math.random();
 
-            moneyOwned += 1800;
+            if (randomNumber < 0.5) {
+                informationDOM.innerHTML = "你这天在放置笼子时被海胆扎到, 你花了80块来治疗";
+                gameOverDOM.hidden = true;
 
-            informationBoxDOM.hidden = false;
+                moneyOwned -= 80;
+
+                informationBoxDOM.hidden = false;
+            } else if (randomNumber < 0.7) {
+                informationDOM.innerHTML = "你这天得了严重的感冒, 你花了200块来治疗";
+                gameOverDOM.hidden = true;
+
+                moneyOwned -= 200;
+
+                informationBoxDOM.hidden = false;
+            } else {
+                informationDOM.innerHTML = "你这天不小心撞上了别人的船, 你交了4500块来修";
+                gameOverDOM.hidden = true;
+
+                moneyOwned -= 4500;
+
+                informationBoxDOM.hidden = false;
+            }
         }
     } else if (option == "pollution") {
-            informationDOM.innerHTML = "因为你的网太多, 警察把你抓起来并且没收了你全部的网, 还扣了你5000块钱";
-            gameOverDOM.hidden = false;
+        informationDOM.innerHTML = "因为你的网太多, 警察把你抓起来并且没收了你全部的网, 还扣了你5000块钱";
 
-            net.extra = net.inshore = net.outshore = 0;
-            moneyOwned -= 5000;
+        net.extra = net.inshore = net.outshore = 0;
+        moneyOwned -= 5000;
 
-            informationBoxDOM.hidden = false;
-            gameOver = true;
+        informationBoxDOM.hidden = false;
     }
 }
 
