@@ -173,7 +173,7 @@ function nextButtonPressed() {
             rentMoney += 5;
         }
 
-        if (net.inshore + net.outshore + net.extra > 300) {
+        if (net.inshore + net.outshore > 200) {
             Math.random() > 0.2 ? information("pollution") : null;
         } else if (moneyOwned > 100000) {
             Math.random() > 0.6 ? information("tooMuchMoney") : null;
@@ -314,6 +314,10 @@ function information(option) {
             randomNumber = Math.random();
 
             if (randomNumber < 0.5) {
+                if (moneyOwned > 200) {
+                    return;
+                }
+
                 informationDOM.innerHTML = "你这天走在路上看到了20块钱, 你问了一下没有人认, 所以你拿走了";
                 gameOverDOM.hidden = true;
 
@@ -321,6 +325,10 @@ function information(option) {
 
                 informationBoxDOM.hidden = false;
             } else if (randomNumber < 0.8) {
+                if (moneyOwned > 500) {
+                    return;
+                }
+
                 informationDOM.innerHTML = "你这天走在路上看到了50块钱, 你问了一下没有人认, 所以你拿走了";
                 gameOverDOM.hidden = true;
 
@@ -328,6 +336,10 @@ function information(option) {
 
                 informationBoxDOM.hidden = false;
             } else if (randomNumber < 0.92) {
+                if (moneyOwned > 1000) {
+                    return;
+                }
+
                 informationDOM.innerHTML = "你这天走在路上看到了100块钱, 你问了一下没有人认, 所以你拿走了";
                 gameOverDOM.hidden = true;
 
@@ -360,6 +372,10 @@ function information(option) {
 
                 informationBoxDOM.hidden = false;
             } else {
+                if (moneyOwned < 1200) {
+                    return
+                }
+
                 informationDOM.innerHTML = "你这天不小心撞上了别人的船, 你交了1500块来修";
                 gameOverDOM.hidden = true;
 
