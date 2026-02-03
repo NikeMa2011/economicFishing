@@ -327,7 +327,7 @@ function information(option) {
                 moneyOwned += 50;
 
                 informationBoxDOM.hidden = false;
-            }   else if (randomNumber < 0.92) {
+            } else if (randomNumber < 0.92) {
                 informationDOM.innerHTML = "你这天走在路上看到了100块钱, 你问了一下没有人认, 所以你拿走了";
                 gameOverDOM.hidden = true;
 
@@ -400,6 +400,12 @@ let netNumberChange = {
 
                 setNetStatusDOM();
             }
+        },
+        all() {
+            net.inshore = net.inshore + net.outshore + net.extra;
+            net.outshore = net.extra = 0;
+
+            setNetStatusDOM();
         }
     },
     outshore: {
@@ -418,6 +424,12 @@ let netNumberChange = {
 
                 setNetStatusDOM();
             }
+        },
+        all() {
+            net.outshore = net.inshore + net.outshore + net.extra;
+            net.inshore = net.extra = 0;
+
+            setNetStatusDOM();
         }
     }
 }
