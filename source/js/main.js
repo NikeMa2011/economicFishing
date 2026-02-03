@@ -173,12 +173,12 @@ function nextButtonPressed() {
             rentMoney += 5;
         }
 
-        if (net.inshore + net.outshore > 300) {
+        if (net.inshore + net.outshore + net.extra > 300) {
             Math.random() > 0.2 ? information("pollution") : null;
         } else if (moneyOwned > 100000) {
             Math.random() > 0.6 ? information("tooMuchMoney") : null;
         } else {
-            Math.random() > 0.7 ? information() : null;
+            Math.random() > 0.8 ? information() : null;
         }
 
         if (moneyOwned < 0) {
@@ -360,10 +360,10 @@ function information(option) {
 
                 informationBoxDOM.hidden = false;
             } else {
-                informationDOM.innerHTML = "你这天不小心撞上了别人的船, 你交了4500块来修";
+                informationDOM.innerHTML = "你这天不小心撞上了别人的船, 你交了1500块来修";
                 gameOverDOM.hidden = true;
 
-                moneyOwned -= 4500;
+                moneyOwned -= 1500;
 
                 informationBoxDOM.hidden = false;
             }
